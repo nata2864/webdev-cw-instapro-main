@@ -1,44 +1,43 @@
+
 import { loginUser, registerUser } from "../api.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
+
 export function renderAuthPageComponent({ appEl, setUser }) {
+// Лежат переменные isLoginMode и imageUrl
   let isLoginMode = true;
   let imageUrl = "";
 
+// Вход и регистрация пользователя
   const renderForm = () => {
     const appHtml = `
-      <div class="page-container">
-          <div class="header-container"></div>
-          <div class="form">
-              <h3 class="form-title">
-                ${
-                  isLoginMode
-                    ? "Вход в&nbsp;Instapro"
-                    : "Регистрация в&nbsp;Instapro"
+    <div class="page-container">
+        <div class="header-container"></div>
+        <div class="form">
+             <h3 class="form-title">
+               ${
+                isLoginMode
+                  ? "Вход в&nbsp;Instapro"
+                  : "Регистрация в&nbsp;Instapro"
                 }
-                </h3>
-              <div class="form-inputs">
-    
-                  ${
-                    !isLoginMode
-                      ? `
-                      <div class="upload-image-container"></div>
-                      <input type="text" id="name-input" class="input" placeholder="Имя" />
-                      `
-                      : ""
-                  }
-                  
+              </h3>
+            <div class="form-inputs">
+                ${
+                  !isLoginMode
+                    ? `
+                    <div class="upload-image-container"></div>
+                    <input type="text" id="name-input" class="input" placeholder="Имя" />
+                    `
+                    : ""
+                } 
                   <input type="text" id="login-input" class="input" placeholder="Логин" />
-                  <input type="password" id="password-input" class="input" placeholder="Пароль" />
-                  
-                  <div class="form-error"></div>
-                  
+                  <input type="password" id="password-input" class="input" placeholder="Пароль" />              
+                  <div class="form-error"></div>         
                   <button class="button" id="login-button">${
                     isLoginMode ? "Войти" : "Зарегистрироваться"
                   }</button>
-              </div>
-            
+            </div>
               <div class="form-footer">
                 <p class="form-footer-title">
                   ${isLoginMode ? "Нет аккаунта?" : "Уже есть аккаунт?"}
@@ -46,7 +45,6 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                     ${isLoginMode ? "Зарегистрироваться." : "Войти."}
                   </button>
                 </p> 
-               
               </div>
           </div>
       </div>    
@@ -54,8 +52,6 @@ export function renderAuthPageComponent({ appEl, setUser }) {
 
     appEl.innerHTML = appHtml;
 
-    // Не вызываем перерендер, чтобы не сбрасывалась заполненная форма
-    // Точечно обновляем кусочек дом дерева
     const setError = (message) => {
       appEl.querySelector(".form-error").textContent = message;
     };
@@ -69,7 +65,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
     if (uploadImageContainer) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
+// Здесь изменяется Url фотографии onImageUrlChange
         onImageUrlChange(newImageUrl) {
+// В локальную переменную imageUrl записываем полученную ссылку на фото
           imageUrl = newImageUrl;
         },
       });
@@ -81,16 +79,6 @@ export function renderAuthPageComponent({ appEl, setUser }) {
       if (isLoginMode) {
         const login = document.getElementById("login-input").value;
         const password = document.getElementById("password-input").value;
-
-        if (!login) {
-          alert("Введите логин");
-          return;
-        }
-
-        if (!password) {
-          alert("Введите пароль");
-          return;
-        }
 
         loginUser({
           login: login,
@@ -107,20 +95,8 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const login = document.getElementById("login-input").value;
         const name = document.getElementById("name-input").value;
         const password = document.getElementById("password-input").value;
-        if (!name) {
-          alert("Введите имя");
-          return;
-        }
-        if (!login) {
-          alert("Введите логин");
-          return;
-        }
-
-        if (!password) {
-          alert("Введите пароль");
-          return;
-        }
-
+       
+// Здесь при регистрации проверяем что imageUrl не пустой 
         if (!imageUrl) {
           alert("Не выбрана фотография");
           return;
@@ -129,7 +105,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         registerUser({
           login: login,
           password: password,
-          name: name,
+          name:name,
           imageUrl,
         })
           .then((user) => {
