@@ -3,6 +3,8 @@ import { renderHeaderComponent } from "./header-component.js";
 import { correctUsersString } from "../helpers.js";
 import { posts, goToPage, user } from "../index.js";
 import { getLikeUser } from "../api.js";
+import { formatDistanceToNow } from "date-fns"
+import { ru } from 'date-fns/locale/';
 
 export function renderPostsPageComponent({ appEl, isUser, token }) {
 
@@ -37,7 +39,7 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
                 <span class="user-name">${post.user.name}</span>
                 ${post.description}
               </p>
-               <p class="post-date">${post.createdAt}</p>     
+               <p class="post-date">${ formatDistanceToNow (new Date(post.createdAt), { locale: ru, addSuffix: true })}</p>     
                </li>`
        }, '') +
       `</ul>
