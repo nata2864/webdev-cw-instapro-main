@@ -32,9 +32,6 @@ export const logout = () => {
   goToPage(POSTS_PAGE);
 };
 
-/**
- * Включает страницу приложения
- */
 export const goToPage = (newPage, data) => {
   if (
     [
@@ -46,7 +43,6 @@ export const goToPage = (newPage, data) => {
     ].includes(newPage)
   ) {
     if (newPage === ADD_POSTS_PAGE) {
-      // Если пользователь не авторизован, то отправляем его на авторизацию перед добавлением поста
       page = user ? ADD_POSTS_PAGE : AUTH_PAGE;
       return renderApp();
     }
@@ -82,8 +78,6 @@ export const goToPage = (newPage, data) => {
           console.error(error);
           goToPage(POSTS_PAGE);
         });
-      // TODO: реализовать получение постов юзера из API
-
     }
 
     page = newPage;

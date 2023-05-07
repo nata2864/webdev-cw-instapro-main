@@ -5,11 +5,9 @@ import { renderUploadImageComponent } from "./upload-image-component.js";
 
 
 export function renderAuthPageComponent({ appEl, setUser }) {
-// Лежат переменные isLoginMode и imageUrl
   let isLoginMode = true;
   let imageUrl = "";
 
-// Вход и регистрация пользователя
   const renderForm = () => {
     const appHtml = `
     <div class="page-container">
@@ -65,9 +63,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
     if (uploadImageContainer) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
-// Здесь изменяется Url фотографии onImageUrlChange
         onImageUrlChange(newImageUrl) {
-// В локальную переменную imageUrl записываем полученную ссылку на фото
           imageUrl = newImageUrl;
         },
       });
@@ -96,7 +92,6 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const name = document.getElementById("name-input").value;
         const password = document.getElementById("password-input").value;
        
-// Здесь при регистрации проверяем что imageUrl не пустой 
         if (!imageUrl) {
           alert("Не выбрана фотография");
           return;

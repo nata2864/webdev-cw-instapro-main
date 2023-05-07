@@ -11,15 +11,12 @@ export function getPosts({ token }) {
     },
   })
     .then((response) => {
-      // console.log(response);
       if (response.status === 401) {
         throw new Error("Нет авторизации")
       }
-
       return response.json()
     })
     .then((data) => {
-      //  console.log(data);
       return data.posts
     })
 }
@@ -32,7 +29,6 @@ export function getUserPosts({ token, id }) {
     },
   })
   .then((response) => {
-    // console.log(response);
     if (response.status === 401) {
       throw new Error("Нет авторизации")
     }
@@ -56,7 +52,6 @@ export function onAddPostClick({ description, imageUrl, token }) {
     }),
   })
   .then((response) => {
-    // console.log(response);
     if (response.status === 401) {
       throw new Error("Нет авторизации")
     }
@@ -64,7 +59,6 @@ export function onAddPostClick({ description, imageUrl, token }) {
     return response.json()
   })
   .then((data) => {
-    //  console.log(data);
     return data.posts
   })
 }
@@ -101,7 +95,6 @@ export function loginUser({ login, password }) {
   })
 }
 
-
 export function uploadImage({ file }) {
   const data = new FormData();
   data.append("file", file);
@@ -122,8 +115,7 @@ export function getLikeUser({ token, postId, isLiked }) {
         Authorization: token,
       },
     })
-    .then((response) => {
-     
+    .then((response) => {    
       return response.json()
     })
   }

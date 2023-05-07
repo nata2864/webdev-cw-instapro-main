@@ -7,14 +7,11 @@ import { POSTS_PAGE } from "../routes.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
 
-// Cтраницa добавления поста
 export function renderAddPostPageComponent({ appEl, token }) {
 
-// Обьявляtn переменную в которой будет загружаться ссылка на фото пользователя
 let postImageUrl = '';
 
 const render = () => {
-// HTML разметка формы добавления поста 
     const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
@@ -32,18 +29,15 @@ const render = () => {
     </div>
     `;
 
-// Перерисовывает данные формы
 appEl.innerHTML = appHtml;
 
-// Рендерит кнопку Выберите фото
     renderUploadImageComponent({
       element: appEl.querySelector(".upload-image-container"),
       onImageUrlChange: (newImageUrl) => postImageUrl = newImageUrl
     });
 
     document.getElementById("add-button").addEventListener("click", () => {
-      const descriptionInput = document.querySelector('.input.textarea');
-// Здесь проверяет что imageUrl не пустой       
+      const descriptionInput = document.querySelector('.input.textarea');       
      if (!postImageUrl) {
       alert('Добавьте изображение');
       return;

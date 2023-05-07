@@ -64,9 +64,7 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
 
   for (const likeButtonElement of likeButtonsElements) {
         likeButtonElement.addEventListener('click', () => {
-    // Находит в разметке postId
         const postId = likeButtonElement.dataset.postId;
-    // Находит index
         const index = likeButtonElement.closest('.post').dataset.index;
 
       let isLiked = ''
@@ -85,7 +83,6 @@ export function renderPostsPageComponent({ appEl, isUser, token }) {
                 name: user.name
               });
             }
-
             renderPostsPageComponent({ appEl, isUser, token })
           })
       };
