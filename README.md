@@ -3,7 +3,7 @@
 MVP аналога популярной соц. сети для обмена фотографиями
 
 ## Ссылка на приложение:
-https://github.com/nata2864/webdev-cw-instapro-main
+https://nata2864.github.io/webdev-cw-instapro-main/
 
 ## Первоначальная оценка
 
